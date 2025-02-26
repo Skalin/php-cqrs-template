@@ -1,0 +1,7 @@
+###> Jetbrains ###
+.idea/*
+###< Jetbrains ###
+
+###> GraphQl Schema ###
+/graphql/schema.graphql
+###< GraphQl Schema ###

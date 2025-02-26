@@ -1,0 +1,65 @@
+services:
+    ###> nginx service ###
+    web:
+        build:
+            context: .
+            dockerfile: nginx/docker/Dockerfile
+        ports:
+            - '8080:80'
+        volumes:
+            - ./:/var/www/app
+        links:
+            - php
+        networks:
+            - app-network
+    ###< nginx service ###
+    ###> php service ###
+    php:
+        build:
+            context: .
+            dockerfile: api/docker/php/Dockerfile
+        volumes:
+            - ./:/var/www/app
+        networks:
+            - app-network
+    ###< php service ###
+    ###> MySQL service ###
+    mysql:
+        image: mysql:8
+        environment:
+            MYSQL_ROOT_PASSWORD: rootpassword
+            MYSQL_DATABASE: mydb
+            MYSQL_USER: user
+            MYSQL_PASSWORD: password
+        ports:
+            - '3306:3306'
+        volumes:
+            - mysql_data:/var/lib/mysql
+        networks:
+            - app-network
+    ###< MySQL service ###
+    ###> phpMyAdmin service ###
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        environment:
+            PMA_HOST: mysql
+            MYSQL_ROOT_PASSWORD: rootpassword
+        ports:
+            - '8888:80'
+        depends_on:
+            - mysql
+
+        networks:
+            - app-network
+
+    ###< phpMyAdmin service
+
+    ###> configuration for frontend ###
+    ###< configuration for frontend: ###
+networks:
+    app-network:
+        driver: bridge
+
+volumes:
+    mysql_data:
+        driver: local

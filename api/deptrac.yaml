@@ -1,0 +1,103 @@
+deptrac:
+  paths:
+    - ./src
+  layers:
+    # Layer definition
+    - name: Domain
+      collectors:
+        - type: glob
+          value: src/**/Domain/**
+
+    - name: Application
+      collectors:
+        - type: glob
+          value: src/**/Application/**
+    - name: Infrastructure/ApiPlatform
+      collectors:
+        - type: bool
+          must:
+            - type: glob
+              value: src/**/Infrastructure/ApiPlatform/**
+          must_not:
+            - type: glob
+              value: src/**/Infrastructure/Doctrine/**
+    - name: Infrastructure/Doctrine
+      collectors:
+        - type: bool
+          must:
+            - type: glob
+              value: src/**/Infrastructure/Doctrine/**
+          must_not:
+            - type: glob
+              value: src/**/Infrastructure/ApiPlatform/**
+    - name: Infrastructure
+      collectors:
+        - type: bool
+          must_not:
+            - type: glob
+              value: src/**/Infrastructure/ApiPlatform/**
+            - type: glob
+              value: src/**/Infrastructure/Doctrine/**
+          must:
+            - type: glob
+              value: src/**/Infrastructure/**
+    - name: Vendor/ApiPlatform
+      collectors:
+        - type: composer
+          composerPath: composer.json
+          composerLockPath: composer.lock
+          packages:
+            - api-platform/symfony
+            - api-platform/graphql
+            - api-platform/metadata
+            - api-platform/state
+            - api-platform/doctrine-orm
+    - name: Vendor/Doctrine
+      collectors:
+        - type: composer
+          composerPath: composer.json
+          composerLockPath: composer.lock
+          packages:
+            - doctrine/doctrine-bundle
+            - doctrine/orm
+            - doctrine/dbal
+    - name: Vendor/Symfony
+      collectors:
+          - type: composer
+            composerPath: composer.json
+            composerLockPath: composer.lock
+            packages:
+              - symfony/http-kernel
+              - symfony/messenger
+              - symfony/validator
+    - name: Bundles
+      collectors:
+        - type: inherits
+          value: Symfony\Component\HttpKernel\Bundle
+
+  ruleset:
+    Domain:
+      - Domain
+    Application:
+      - Domain
+    Infrastructure/ApiPlatform:
+      - Domain
+      - Application
+      - Infrastructure/Doctrine
+      - Infrastructure
+      - Vendor/ApiPlatform
+    Infrastructure/Doctrine:
+      - Domain
+      - Application
+      - Infrastructure
+      - Vendor/Doctrine
+      - Vendor/Symfony
+    Infrastructure:
+      - Domain
+      - Application
+      - Vendor/Symfony
+    Bundles:
+      - Domain
+      - Application
+      - Infrastructure
+      - Vendor/Symfony
