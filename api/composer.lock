@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad1979f27f4d94d312770693a8b29a9a",
+    "content-hash": "bd98e9bf714d1ebf328df772f40b0000",
     "packages": [
         {
             "name": "api-platform/doctrine-common",
@@ -240,16 +240,16 @@
         },
         {
             "name": "api-platform/graphql",
-            "version": "v4.0.18",
+            "version": "v4.0.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/graphql.git",
-                "reference": "c18cf5df9936084c41cdd86cb8398897cdf44952"
+                "reference": "2e20c6379191c7fc4476650d778c211093215caa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/graphql/zipball/c18cf5df9936084c41cdd86cb8398897cdf44952",
-                "reference": "c18cf5df9936084c41cdd86cb8398897cdf44952",
+                "url": "https://api.github.com/repos/api-platform/graphql/zipball/2e20c6379191c7fc4476650d778c211093215caa",
+                "reference": "2e20c6379191c7fc4476650d778c211093215caa",
                 "shasum": ""
             },
             "require": {
@@ -257,7 +257,7 @@
                 "api-platform/serializer": "^3.4 || ^4.0",
                 "api-platform/state": "^3.4 || ^4.0",
                 "php": ">=8.2",
-                "symfony/property-info": "^6.4 || ^7.0",
+                "symfony/property-info": "^6.4 || ^7.1",
                 "symfony/serializer": "^6.4 || ^7.0",
                 "webonyx/graphql-php": "^15.0",
                 "willdurand/negotiation": "^3.1"
@@ -319,9 +319,9 @@
                 "graphql"
             ],
             "support": {
-                "source": "https://github.com/api-platform/graphql/tree/v4.0.18"
+                "source": "https://github.com/api-platform/graphql/tree/v4.0.22"
             },
-            "time": "2025-01-10T10:30:13+00:00"
+            "time": "2025-04-03T15:03:12+00:00"
         },
         {
             "name": "api-platform/http-cache",

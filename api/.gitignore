@@ -27,3 +27,6 @@ phpstan.neon
 ###> deptrac ###
 /.deptrac.cache
 ###> deptrac ###
+###> deptrac/deptrac ###
+/.deptrac.cache
+###< deptrac/deptrac ###
