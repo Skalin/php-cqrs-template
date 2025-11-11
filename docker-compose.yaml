@@ -14,6 +14,21 @@ services:
             - app-network
     ###< nginx service ###
     ###> php service ###
+    php-build:
+      build:
+        context: .
+        dockerfile: api/docker/php/Dockerfile
+      volumes:
+        - ./:/var/www/app
+      command: >
+        sh -c "
+        cd api;
+        echo 'Running PHP setup...';
+        composer install && php bin/console doctrine:migrations:migrate --no-interaction;
+        echo 'PHP setup completed.'
+        "
+      networks:
+        - app-network
     php:
         build:
             context: .
@@ -22,6 +37,8 @@ services:
             - ./:/var/www/app
         networks:
             - app-network
+        depends_on:
+          - php-build
     ###< php service ###
     ###> MySQL service ###
     mysql:
