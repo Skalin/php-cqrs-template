@@ -1,4 +1,4 @@
-FROM php:8.4.14-fpm-alpine3.21
+FROM php:8.5.0-fpm-alpine3.21
 
 
 RUN apk update && apk add \
